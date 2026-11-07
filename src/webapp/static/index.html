@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>智学引擎 · 学习，让未来更有可能</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+<div class="shell">
+  <!-- 顶栏 -->
+  <header class="topbar">
+    <div class="brand-badge">🪐</div>
+    <div class="head-c">
+      <div class="head-t">学习，让未来更有可能</div>
+      <div class="head-s">AI 为你定制的专属学习方案</div>
+    </div>
+    <div class="head-r">
+      <div class="avatar">👤</div>
+    </div>
+  </header>
+
+  <div class="frame">
+    <!-- 侧栏 -->
+    <aside class="side">
+      <div class="side-logo">智学引擎<small>AI 智能学习平台</small></div>
+      <nav class="nav">
+        <a class="nav-item active" href="/">⌂ 首页</a>
+        <a class="nav-item" href="/study">📖 我的学习</a>
+        <a class="nav-item" data-todo>📕 错题本</a>
+        <a class="nav-item" data-todo>📊 学习报告</a>
+        <a class="nav-item" data-todo>🧩 知识图谱</a>
+        <a class="nav-item" data-todo>⚙ 设置</a>
+      </nav>
+      <div class="side-foot">持续学习<br>遇见更好的自己!</div>
+    </aside>
+
+    <!-- 主区 -->
+    <main class="main">
+      <!-- hero: 问候 / 大脑主视觉 / 双卡 -->
+      <section class="hero">
+        <div class="hello">
+          <div class="hi">你好，学习者!</div>
+          <div class="sub">今日也要加油哦~ ✨</div>
+          <div class="streak" id="streakBadge">🔥 连续学习 0 天</div>
+          <div class="hello-stats">
+            <div class="hs"><b id="hsToday">0</b><span>今日复习</span></div>
+            <div class="hs"><b id="hsTotal">0</b><span>知识点</span></div>
+          </div>
+        </div>
+        <div class="brain-wrap">
+          <img id="brainImg" class="hidden" alt="">
+          <canvas id="brainCv" width="560" height="420"></canvas>
+        </div>
+        <div class="acts">
+          <a class="act-card blue" href="/study">
+            <div class="act-ico">📖</div>
+            <div class="act-t">开始学习</div>
+            <div class="act-s">探索知识，提升自我</div>
+            <div class="act-go">→</div>
+          </a>
+          <a class="act-card purple" href="/review">
+            <div class="act-ico">🔄</div>
+            <div class="act-t">开始复习</div>
+            <div class="act-s">巩固记忆，查漏补缺</div>
+            <div class="act-go">→</div>
+          </a>
+        </div>
+      </section>
+
+      <!-- 进度总览 + 趋势 -->
+      <section class="row">
+        <div class="panel">
+          <div class="p-head"><span class="p-ico">📊</span>学习进度总览</div>
+          <div class="prog">
+            <div class="ring-wrap">
+              <svg id="ringSvg" viewBox="0 0 120 120">
+                <defs>
+                  <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#3b82f6"/>
+                    <stop offset="100%" stop-color="#67e8f9"/>
+                  </linearGradient>
+                </defs>
+                <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                <circle id="ringFg" class="ring-fg" cx="60" cy="60" r="50"/>
+              </svg>
+              <div class="ring-c">
+                <b id="ringPct">0%</b>
+                <span>总体进度</span>
+              </div>
+            </div>
+            <div class="stat-rows">
+              <div class="srow"><span class="si blue">📘</span>已掌握<b id="stMastered">0</b></div>
+              <div class="srow"><span class="si cyan">⬇️</span>待学习<b id="stFresh">0</b></div>
+              <div class="srow"><span class="si purple">🔄</span>待复习<b id="stDue">0</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="p-head"><span class="p-ico">📈</span>学习趋势分析
+            <span class="tabs" id="trendTabs">
+              <button class="tab active" data-days="7">近7天</button>
+              <button class="tab" data-days="30">近30天</button>
+            </span>
+          </div>
+          <div class="chart-wrap">
+            <div class="legend"><span class="lg"><i class="dot c1"></i>每日复习次数</span></div>
+            <svg id="trendSvg" viewBox="0 0 560 190" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- 待学习 / 立方体 / 待复习 -->
+      <section class="row row3">
+        <div class="panel">
+          <div class="p-head"><span class="p-ico">📚</span>待学习的知识点</div>
+          <div class="list" id="learnList"><div class="l-empty">暂无新知识点</div></div>
+        </div>
+        <div class="cube-wrap">
+          <div class="cube-scene">
+            <div class="cube" id="cube">
+              <i class="f fz"></i><i class="f fn"></i><i class="f ff"></i>
+              <i class="f fr"></i><i class="f fb"></i><i class="f fl"></i>
+            </div>
+            <div class="cube-glow"></div>
+          </div>
+          <div class="cube-cap">学习是通往未来的钥匙</div>
+        </div>
+        <div class="panel">
+          <div class="p-head"><span class="p-ico">⏰</span>待复习知识点</div>
+          <div class="list" id="reviewList"><div class="l-empty">暂无到期复习</div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+<div id="toast"></div>
+<script src="/static/home.js"></script>
+</body>
+</html>

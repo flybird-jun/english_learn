@@ -1,0 +1,166 @@
+/* 复习考试页 */
+:root{
+  --bg:#050a17; --panel:rgba(13,26,48,.7); --line:rgba(56,120,248,.22);
+  --line2:rgba(56,150,248,.45); --cyan:#22d3ee; --cyan2:#67e8f9; --blue:#3b82f6;
+  --purple:#8b5cf6; --text:#cfe0f5; --dim:#61789a; --ok:#34d399; --err:#f87171;
+  --warn:#fbbf24;
+  --mono:ui-monospace,'Cascadia Code',Consolas,monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+body{min-height:100vh; color:var(--text); font:14px/1.65 ui-sans-serif,system-ui,
+  'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+  background:radial-gradient(1100px 560px at 75% -8%, #0d2244 0%, transparent 55%),
+             radial-gradient(800px 480px at 8% 108%, #0a1a38 0%, transparent 55%), var(--bg);}
+body::before{content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(700px 300px at 15% 20%, rgba(34,211,238,.07), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(56,150,248,.028) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(90deg, rgba(56,150,248,.028) 0 1px, transparent 1px 46px);}
+.wrap{position:relative; z-index:1; max-width:880px; margin:0 auto; padding:18px 16px 40px}
+
+/* 顶栏 */
+.bar{display:flex; align-items:center; gap:12px; margin-bottom:16px}
+.back{color:var(--dim); text-decoration:none; font-size:13px; padding:7px 12px;
+  border:1px solid var(--line); border-radius:10px; transition:.15s; line-height:1}
+.back:hover{color:var(--cyan2); border-color:var(--line2)}
+.title{font-size:17px; font-weight:700; letter-spacing:1px}
+.tsub{font-size:12px; color:var(--dim); font-weight:400; margin-left:8px}
+.spacer{flex:1}
+.fsr-chip{font:11.5px var(--mono); color:var(--cyan2); border:1px solid var(--line2);
+  border-radius:99px; padding:5px 12px; background:rgba(34,211,238,.07)}
+
+/* 卡片 */
+.card{background:var(--panel); border:1px solid var(--line); border-radius:18px;
+  backdrop-filter:blur(8px); padding:30px 34px; box-shadow:0 6px 40px rgba(2,8,20,.5),
+  inset 0 0 30px rgba(34,150,248,.05)}
+.card.center{text-align:center}
+
+/* 准备态 */
+.orb{position:relative; width:110px; height:110px; margin:26px auto 18px; font-size:40px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:50%; background:rgba(34,211,238,.08); border:1px solid var(--line2);
+  box-shadow:0 0 40px rgba(34,211,238,.25), inset 0 0 30px rgba(34,211,238,.12);
+  animation:float 3.2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.orbit{position:absolute; inset:-14px; border-radius:50%;
+  border:1px dashed rgba(103,232,249,.4); animation:spin 5s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.orbit i{position:absolute; top:-4px; left:50%; width:8px; height:8px; margin-left:-4px;
+  border-radius:50%; background:var(--cyan2); box-shadow:0 0 10px var(--cyan)}
+.prep-t{font-size:16px; font-weight:600; letter-spacing:1px}
+.prep-s{color:var(--dim); font-size:12.5px; margin-top:8px}
+.prep-actions{margin-top:20px}
+
+/* 就绪态 */
+.ready-num{margin:14px 0 4px}
+.ready-num b{font-size:52px; font-family:var(--mono); font-weight:700;
+  background:linear-gradient(90deg,#9fdcff,#67e8f9);
+  -webkit-background-clip:text; background-clip:text; color:transparent;}
+.ready-num span{margin-left:10px; color:var(--dim); font-size:14px}
+.ready-meta{color:var(--dim); font-size:12.5px; margin-bottom:20px; font-family:var(--mono)}
+.ready-tip{color:var(--dim); font-size:12px; margin-top:16px}
+.ready-tip b{color:var(--cyan2)}
+
+/* 考试态 */
+.exam-head{display:flex; align-items:center; gap:14px; margin-bottom:18px}
+.qidx{font:12.5px var(--mono); color:var(--cyan2); flex:none; letter-spacing:1px}
+.qbar{flex:1; height:6px; border-radius:99px; background:rgba(56,150,248,.14); overflow:hidden}
+.qbar i{display:block; height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--cyan),var(--blue));
+  box-shadow:0 0 8px rgba(34,211,238,.6); transition:width .4s ease}
+.question{font-size:20px; line-height:1.8; color:#eaf4ff; margin:8px 0 16px; min-height:64px;
+  animation:fadein .3s ease; text-shadow:0 0 18px rgba(34,211,238,.15)}
+@keyframes fadein{from{opacity:0; transform:translateY(6px)}}
+.rec-area{display:flex; align-items:center; gap:26px; margin:22px 0 6px; flex-wrap:wrap}
+.mic-col{display:flex; flex-direction:column; align-items:center; gap:10px; flex:none}
+.mic{position:relative; width:96px; height:96px; border-radius:50%; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(150deg, rgba(23,58,118,.95), rgba(12,30,66,.9));
+  border:1px solid rgba(96,180,255,.55); box-shadow:0 0 28px rgba(34,150,248,.30),
+  inset 0 0 24px rgba(34,150,248,.18); transition:.2s}
+.mic::before{content:""; position:absolute; inset:-1px; border-radius:50%;
+  border:1px solid rgba(103,232,249,.5); opacity:0}
+.mic:hover{transform:translateY(-2px) scale(1.03);
+  box-shadow:0 0 40px rgba(34,150,248,.5), inset 0 0 24px rgba(34,150,248,.22)}
+.mic-ico{font-size:34px; filter:drop-shadow(0 0 12px rgba(103,232,249,.6))}
+.mic-t{font-size:13px; color:var(--dim); letter-spacing:1px}
+.mic.rec{border-color:rgba(248,113,113,.65);
+  background:linear-gradient(150deg, rgba(96,24,44,.95), rgba(58,14,30,.9));
+  box-shadow:0 0 34px rgba(248,113,113,.4), inset 0 0 24px rgba(248,113,113,.18)}
+.mic.rec .mic-ico{animation:blink 1.2s ease-in-out infinite}
+.mic.rec::before{opacity:1; animation:ripple 1.6s ease-out infinite}
+@keyframes ripple{0%{transform:scale(1); opacity:.8}
+  70%{transform:scale(1.55); opacity:0}100%{transform:scale(1.55); opacity:0}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.mic:disabled{opacity:.55; cursor:default; transform:none}
+.rec-right{flex:1; min-width:180px; display:flex; flex-direction:column; gap:8px}
+.rec-time{font:17px var(--mono); color:#fda4af; letter-spacing:2px; align-self:flex-end}
+#meterCv{width:100%; max-width:360px; height:56px; opacity:.95}
+
+.exam-actions{display:flex; gap:12px; margin-top:18px; justify-content:flex-end}
+.exam-tip{color:var(--dim); font-size:11.5px; margin-top:14px; letter-spacing:.5px}
+
+/* 结果态 */
+.result-head{margin:6px 2px 18px}
+.rt{font-size:18px; font-weight:700; letter-spacing:1px;
+  background:linear-gradient(90deg,#9fdcff,#a78bfa);
+  -webkit-background-clip:text; background-clip:text; color:transparent;}
+.rs{color:var(--dim); font-size:13px; margin:6px 0 10px}
+.pbar{height:5px; border-radius:99px; background:rgba(56,150,248,.14); overflow:hidden}
+.pbar i{display:block; height:100%; width:0%;
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+  box-shadow:0 0 8px rgba(34,211,238,.6); transition:width .5s ease}
+.r-item{background:var(--panel); border:1px solid var(--line); border-radius:16px;
+  padding:18px 20px; margin-bottom:14px; backdrop-filter:blur(8px);
+  animation:fadein .35s ease}
+.r-q{font-size:15px; color:#eaf4ff; line-height:1.7; margin-bottom:10px}
+.r-verdict{display:inline-flex; align-items:center; gap:7px; font-size:12.5px;
+  border-radius:99px; padding:4px 12px; margin-bottom:10px; margin-right:8px}
+.r-verdict.ok{color:#a7f3d0; background:rgba(52,211,153,.12); border:1px solid rgba(52,211,153,.4)}
+.r-verdict.bad{color:#fecaca; background:rgba(248,113,113,.12); border:1px solid rgba(248,113,113,.4)}
+.r-verdict.wait{color:#fde68a; background:rgba(251,191,36,.10); border:1px solid rgba(251,191,36,.35)}
+.r-verdict.none{color:var(--dim); background:rgba(97,120,154,.10); border:1px solid var(--line)}
+.r-verdict.fsr{color:#93c5fd; background:rgba(59,130,246,.12); border:1px solid rgba(59,130,246,.4)}
+
+/* 题目界面的评分面板 */
+.rate-panel{margin-top:18px; padding:16px 18px; border:1px dashed var(--line2);
+  border-radius:14px; background:rgba(10,22,44,.5); animation:fadein .3s ease}
+.rp-t{font-size:13px; color:#9fdcff; letter-spacing:1px; margin-bottom:12px}
+.r-rate{display:flex; gap:10px; flex-wrap:wrap}
+.r-comment{font-size:12.5px; color:var(--dim); margin:2px 0 10px; line-height:1.7}
+.r-row{display:flex; gap:10px; align-items:flex-start; margin:8px 0; flex-wrap:wrap}
+.r-label{flex:none; font-size:12px; color:var(--dim); padding:3px 0; width:74px}
+.r-ans{flex:1; min-width:200px; font-size:13.5px; color:#a5f3fc; line-height:1.7}
+.r-reply{flex:1; min-width:200px; font-size:13.5px; color:#c4b5fd; line-height:1.7}
+.r-reply.empty{color:var(--dim); font-style:italic}
+.abtn{border:1px solid var(--line2); background:rgba(34,211,238,.07); color:var(--cyan2);
+  border-radius:99px; padding:6px 13px; font-size:12px; cursor:pointer; transition:.15s; line-height:1.4}
+.abtn:hover{background:rgba(34,211,238,.18); box-shadow:0 0 10px rgba(34,211,238,.25)}
+.abtn:disabled{opacity:.4; cursor:default; pointer-events:none}
+.rate-btn{flex:1; min-width:96px; border:1px solid var(--line); border-radius:12px;
+  background:rgba(10,22,44,.55); color:var(--text); padding:9px 6px; cursor:pointer;
+  transition:.15s; text-align:center}
+.rate-btn b{display:block; font-size:13px; letter-spacing:1px}
+.rate-btn span{display:block; font-size:10.5px; color:var(--dim); margin-top:2px; font-family:var(--mono)}
+.rate-btn:hover{transform:translateY(-2px); border-color:var(--line2)}
+.rate-btn.r1:hover,.rate-btn.r1.sel{border-color:var(--err); color:#fecaca; box-shadow:0 0 12px rgba(248,113,113,.25)}
+.rate-btn.r2:hover,.rate-btn.r2.sel{border-color:var(--warn); color:#fde68a; box-shadow:0 0 12px rgba(251,191,36,.25)}
+.rate-btn.r3:hover,.rate-btn.r3.sel{border-color:var(--ok); color:#a7f3d0; box-shadow:0 0 12px rgba(52,211,153,.25)}
+.rate-btn.r4:hover,.rate-btn.r4.sel{border-color:var(--cyan); color:#a5f3fc; box-shadow:0 0 12px rgba(34,211,238,.25)}
+.rate-btn:disabled{opacity:.45; cursor:default; transform:none}
+
+.done-row{text-align:center; margin-top:20px}
+.foot-hint{text-align:center; color:var(--dim); font-size:11.5px; margin-top:14px; letter-spacing:1px}
+
+/* 按钮 */
+.btn{border:1px solid var(--line2); background:rgba(34,211,238,.07); color:var(--text);
+  border-radius:12px; padding:10px 22px; font-size:13.5px; cursor:pointer; transition:.18s;
+  font-family:inherit; letter-spacing:1px}
+.btn:hover{background:rgba(34,211,238,.16); box-shadow:0 0 14px rgba(34,211,238,.25)}
+.btn.primary{background:linear-gradient(90deg, rgba(34,211,238,.30), rgba(59,130,246,.30));
+  border-color:var(--cyan); color:#f2faff}
+.btn.primary:hover{box-shadow:0 0 22px rgba(34,211,238,.4)}
+.btn.big{padding:13px 40px; font-size:15px; border-radius:14px}
+.btn.ghost{background:transparent; border-color:var(--line); color:var(--dim)}
+.btn.ghost:hover{color:var(--cyan2); border-color:var(--line2); background:rgba(34,211,238,.06)}
+.hidden{display:none!important}

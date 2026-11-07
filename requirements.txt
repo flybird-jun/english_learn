@@ -1,0 +1,12 @@
+# 智学引擎 (main.py) 依赖清单
+# 建议安装在工程虚拟环境:  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+# 未安装依赖直接运行时, Python 会抛 ImportError 提示缺失模块。
+# 网络不稳时加镜像:  -i https://mirrors.aliyun.com/pypi/simple/
+
+edge-tts
+fastapi
+uvicorn[standard]
+httpx
+python-multipart        # /api/exam/answer 录音上传 (multipart/form-data)
+fsrs                    # FSRS-6 调度 (py-fsrs 6.3+)
+faster-whisper          # 录音转文字 (自带 PyAV 解码, 无需系统 ffmpeg; 模型自动从 HF 下载)

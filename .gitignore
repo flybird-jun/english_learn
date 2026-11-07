@@ -1,0 +1,9 @@
+# Python 虚拟环境
+.venv/
+
+# 运行期生成物
+resource/
+__pycache__/
+*.pyc
+# 截图等临时文件
+

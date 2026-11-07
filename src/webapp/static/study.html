@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>研读台 · 智学引擎</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div id="app">
+  <div id="topbar">
+    <div id="logo">⚡ EN·PRACTICE<small>ENGLISH STUDY CONSOLE</small></div>
+    <a id="homeLink" href="/" title="返回首页">⌂</a>
+    <div class="spacer"></div>
+    <label class="mini">音色</label>
+    <select id="voiceSel"></select>
+    <label class="mini">语速</label>
+    <select id="speedSel">
+      <option value="0.75">0.75×</option>
+      <option value="1" selected>1.0×</option>
+      <option value="1.25">1.25×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+  </div>
+  <div id="main">
+    <div class="pane" id="leftPane">
+      <div class="pane-head">📚 文章 <b id="artCount"></b></div>
+      <div class="pane-body" id="articleList"></div>
+    </div>
+    <div class="splitter" id="splitL"></div>
+    <div class="pane" id="centerPane">
+      <div class="pane-head">
+        <button id="playAllBtn" title="播放全文"></button>
+        <button id="playStopBtn" title="停止播放"></button>
+        <button id="transBtn" title="开启/关闭划词划句翻译"></button>
+        <div id="playProg" title="播放进度"><i></i></div>
+      </div>
+      <div class="pane-body" id="articleView"><div id="emptyHint">← 从左侧选择一篇文章开始学习</div></div>
+    </div>
+    <div class="splitter" id="splitR"></div>
+    <div class="pane" id="rightPane">
+      <div class="pane-head">📝 笔记 <b id="noteCount"></b></div>
+      <div class="pane-body" id="noteList"><div class="h-empty">暂无笔记</div></div>
+    </div>
+  </div>
+</div>
+<div id="popup"></div>
+<div id="toast"></div>
+<audio id="player"></audio>
+<script src="/static/app.js"></script>
+</body>
+</html>

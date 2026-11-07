@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>复习考试 · 智学引擎</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/review.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="bar">
+    <a class="back" href="/">⌂ 首页</a>
+    <div class="title">🔄 开始复习 <span class="tsub">巩固记忆，查漏补缺</span></div>
+    <div class="spacer"></div>
+    <div class="fsr-chip" id="fsrChip" title="FSRS 调度参数">R=90%</div>
+  </header>
+
+  <!-- 1. 准备: 分析新文章 -->
+  <section id="stPrepare" class="card center">
+    <div class="orb"><div class="orbit"><i></i></div>🧠</div>
+    <div class="prep-t" id="prepTitle">AI 正在分析新文章…</div>
+    <div class="prep-s" id="prepMsg">调用 claude code · design-exam 抽取知识点出题</div>
+    <div class="prep-actions hidden" id="prepActions">
+      <button class="btn primary" id="btnForceStart">用已有题目开始考试</button>
+    </div>
+  </section>
+
+  <!-- 2. 就绪: 到期概况 -->
+  <section id="stReady" class="card hidden">
+    <div class="ready-num"><b id="dueCount">0</b><span>道题到期待复习</span></div>
+    <div class="ready-meta" id="readyMeta"></div>
+    <button class="btn primary big" id="btnStart">开始考试</button>
+    <div class="ready-tip">每题用 <b>语音作答</b> · AI 判分 · 结束后按回忆表现评分</div>
+  </section>
+
+  <!-- 3. 考试: 单题 + 实时录音 -->
+  <section id="stExam" class="card hidden">
+    <div class="exam-head">
+      <span class="qidx" id="qIdx">1 / 5</span>
+      <div class="qbar"><i id="qBar"></i></div>
+    </div>
+    <div class="question" id="qText"></div>
+    <button class="btn ghost" id="btnQSay">🔊 播放题目</button>
+    <div class="rec-area">
+      <div class="mic-col">
+        <button class="mic" id="micBtn" title="开始录音">
+          <span class="mic-ring"></span>
+          <span class="mic-ico">🎙️</span>
+        </button>
+        <span class="mic-t" id="micLabel">点击开始作答</span>
+      </div>
+      <div class="rec-right">
+        <canvas id="meterCv" width="300" height="56"></canvas>
+        <div class="rec-time hidden" id="recTime">00:00</div>
+      </div>
+    </div>
+    <div class="exam-actions">
+      <button class="btn ghost" id="btnSkip">跳过本题</button>
+      <button class="btn primary hidden" id="btnSubmit">完成并提交 ✓</button>
+    </div>
+    <div class="rate-panel hidden" id="ratePanel">
+      <div class="rp-t">回忆表现? — 判对按此档计入 FSRS, 判错自动按 Again</div>
+      <div class="r-rate" id="rateBtns"></div>
+    </div>
+    <div class="exam-tip" id="examTip">录音 ≤60s 自动停止 · 选完表现自动进入下一题 · 全部答完后 AI 统一阅卷</div>
+  </section>
+
+  <!-- 4. 结果: 逐题详情 + FSRS 评分 -->
+  <section id="stResult" class="hidden">
+    <div class="result-head">
+      <div class="rt">考试完成 🎉</div>
+      <div class="rs" id="resultSummary">AI 统一阅卷中…</div>
+      <div class="pbar"><i id="judgeBar"></i></div>
+    </div>
+    <div id="resultList"></div>
+    <div class="done-row">
+      <button class="btn primary big" id="btnDone">完成复习, 回首页</button>
+    </div>
+  </section>
+
+  <div class="foot-hint" id="footHint"></div>
+</div>
+<audio id="qAudio"></audio>
+<script src="/static/review.js"></script>
+</body>
+</html>
